@@ -10,7 +10,7 @@ $users = $result["data"]['users'];
 foreach($users as $user ){
 
     ?>
-    <p><?=$user->getEmail()?></p>
+    <p><?=$user->getPseudo()?></p>
     <?php
 }
 

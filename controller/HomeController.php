@@ -6,8 +6,9 @@
     use App\AbstractController;
     use App\ControllerInterface;
     use Model\Managers\UserManager;
-    // use Model\Managers\TopicManager;
-    // use Model\Managers\PostManager;
+    use Model\Managers\CategoryManager;
+    use Model\Managers\TopicManager;
+    use Model\Managers\PostManager;
     
     class HomeController extends AbstractController implements ControllerInterface{
 
@@ -24,7 +25,6 @@
             $manager = new UserManager; 
 
             $users = $manager->findAll();
-            var_dump($users);
 
 
 
@@ -33,8 +33,7 @@
                 "data" => ["users" => $users]
             ];
         }
-            
-       
+
 
         public function forumRules(){
             

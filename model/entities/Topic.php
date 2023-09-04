@@ -10,6 +10,7 @@
         private $user;
         private $creationDate;
         private $isLocked;
+        private $category;
 
         public function __construct($data){         
             $this->hydrate($data); // permet de prendre les donner de la bd et hydrater notre objet       
@@ -75,22 +76,22 @@
                 return $this;
         }
 
-        public function getCreationdate(){
-            $formattedDate = $this->creationdate->format("d/m/Y, H:i:s");
+        public function getCreationDate(){
+            $formattedDate = $this->creationDate->format("d/m/Y, H:i:s");
             return $formattedDate;
         }
 
-        public function setCreationdate($date){
-            $this->creationdate = new \DateTime($date);
+        public function setCreationDate($date){
+            $this->creationDate = new \DateTime($date);
             return $this;
         }
 
         /**
          * Get the value of closed
          */ 
-        public function getClosed()
+        public function getisLocker()
         {
-                return $this->closed;
+                return $this->isLocked;
         }
 
         /**
@@ -98,9 +99,9 @@
          *
          * @return  self
          */ 
-        public function setClosed($closed)
+        public function setisLocker($closed)
         {
-                $this->closed = $closed;
+                $this->isLocked = $closed;
 
                 return $this;
         }
@@ -112,4 +113,24 @@
         }
                 
         
+
+        /**
+         * Get the value of category
+         */ 
+        public function getCategory()
+        {
+                return $this->category;
+        }
+
+        /**
+         * Set the value of category
+         *
+         * @return  self
+         */ 
+        public function setCategory($category)
+        {
+                $this->category = $category;
+
+                return $this;
+        }
     }

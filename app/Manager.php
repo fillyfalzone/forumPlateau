@@ -48,25 +48,24 @@
             //$keys = ['username' , 'password', 'email']
             $keys = array_keys($data);
             //$values = ['Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com']
-            $values = array_values($data);
             //"username,password,email"
             $sql = "INSERT INTO ".$this->tableName."
                     (".implode(',', $keys).") 
                     VALUES
-                    ('".implode("','",$values)."')";
+                    (:".implode(" , :",$keys).")";
                     //"'Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com'"
             /*
                 INSERT INTO user (username,password,email) VALUES ('Squalli', 'dfsyfshfbzeifbqefbq', 'sql@gmail.com') 
             */
             try{
-                return DAO::insert($sql);
+                return DAO::insert($sql, $data);
             }
             catch(\PDOException $e){
                 echo $e->getMessage();
                 die();
             }
         }
-        
+ 
         public function delete($id){
             $sql = "DELETE FROM ".$this->tableName."
                     WHERE id_".$this->tableName." = :id

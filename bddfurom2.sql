@@ -14,8 +14,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Listage des données de la table forum_v2.category : ~0 rows (environ)
-REPLACE INTO `category` (`id_category`, `categoryName`, `description`) VALUES
+-- Listage des données de la table forum_v2.category : ~11 rows (environ)
+DELETE FROM `category`;
+INSERT INTO `category` (`id_category`, `categoryName`, `description`) VALUES
 	(1, 'REGLEMENT', 'Catégorie réservée aux règlements du forum (veuillez la lire avant de vous inscrire et de contribuer).'),
 	(2, 'PRESENTATION', 'Catégorie réservée à la présentation des membres, pour signaler votre appartenance à la communauté.'),
 	(3, 'HISTOIRE DU CLUB', 'Catégorie réservée à l\'histoire du Chelsea Football Club.'),
@@ -26,11 +27,11 @@ REPLACE INTO `category` (`id_category`, `categoryName`, `description`) VALUES
 	(8, 'BILAN SAISON', 'Catégorie réservée au bilan de la saison, aux moments mémorables, aux points forts et aux points faibles.'),
 	(9, 'EVENEMENTS', 'Catégorie réservée aux événements : venez partager des moments inoubliables.'),
 	(10, 'BLA-BLATAGE', 'Catégorie réservée aux discussions éphémères, aux joies et aux coups de gueule.'),
-	(11, 'bonjour', 'comment allez-vous'),
-	(12, '', '');
+	(11, 'bonjour', 'comment allez-vous');
 
--- Listage des données de la table forum_v2.post : ~0 rows (environ)
-REPLACE INTO `post` (`id_post`, `message`, `postDate`, `topic_id`, `user_id`) VALUES
+-- Listage des données de la table forum_v2.post : ~19 rows (environ)
+DELETE FROM `post`;
+INSERT INTO `post` (`id_post`, `message`, `postDate`, `topic_id`, `user_id`) VALUES
 	(5, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:01:36', 2, 1),
 	(6, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:01:57', 2, 13),
 	(7, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:02:14', 2, 10),
@@ -51,8 +52,9 @@ REPLACE INTO `post` (`id_post`, `message`, `postDate`, `topic_id`, `user_id`) VA
 	(22, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 8, 7),
 	(23, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 10, 2);
 
--- Listage des données de la table forum_v2.topic : ~0 rows (environ)
-REPLACE INTO `topic` (`id_topic`, `title`, `creationDate`, `user_id`, `category_id`, `isLocked`) VALUES
+-- Listage des données de la table forum_v2.topic : ~10 rows (environ)
+DELETE FROM `topic`;
+INSERT INTO `topic` (`id_topic`, `title`, `creationDate`, `user_id`, `category_id`, `isLocked`) VALUES
 	(1, 'Les Légendes', '2023-09-01 10:50:30', 15, 3, 0),
 	(2, 'Le Palmarès', '2023-09-01 08:54:15', 2, 3, 0),
 	(3, 'Présentez-vous', '2023-09-04 08:27:58', 1, 2, 0),
@@ -65,7 +67,8 @@ REPLACE INTO `topic` (`id_topic`, `title`, `creationDate`, `user_id`, `category_
 	(10, 'venez blablater', '2023-09-04 08:34:49', 11, 10, 0);
 
 -- Listage des données de la table forum_v2.user : ~17 rows (environ)
-REPLACE INTO `user` (`id_user`, `email`, `pseudo`, `passWord`, `signUpDate`, `role`, `avatar`, `isBanned`) VALUES
+DELETE FROM `user`;
+INSERT INTO `user` (`id_user`, `email`, `pseudo`, `passWord`, `signUpDate`, `role`, `avatar`, `isBanned`) VALUES
 	(1, 'jules@gmail.com', 'JuliusCesar', '1234', '2023-08-30 16:40:10', NULL, 'avatara.png', 0),
 	(2, 'paul@yahoo.fr', 'Paulo2023', '12345', '2023-08-30 16:54:34', NULL, 'avatarb.png', 0),
 	(3, 'caromb12@chelsea-fc.com', 'CarolineMB12', 'MotDePasse1', '2023-09-01 07:38:46', NULL, 'avatar1.png', 0),
