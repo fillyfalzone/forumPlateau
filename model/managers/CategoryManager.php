@@ -3,7 +3,8 @@
 
     use App\DAO;
     use App\Manager;
-use PDO;
+    use Model\Entities\Category;
+    use PDO;
 
     class CategoryManager extends Manager{
 
@@ -17,24 +18,45 @@ use PDO;
 
         // add a new category in the database
         public function addCategoryInDb($data){
-            //use method from manager.php 
+            //use add method from manager.php 
             return $this->add($data); 
         }
 
-        public function editCategoryInDb($data, $id){
-
-            $sql = "UPDATE category c
-            SET c.categoryName = ':categoryName',
-                 c.description = ':description',
-            WHERE c.id_category = :id";
-
-            $sql->bindValue(":id",$id, PDO::PARAM_INT);
-            $sql->bindValue(":categoryName",$data['categoryName'], PDO::PARAM_STR);
-            $sql->bindValue(":description",$data['description'], PDO::PARAM_STR);
-
-        
+        public function getCategoryById($id){
+            //use findOneById method from manager.php
+            return $this->findOneById($id);
         }
 
+        public function updateCategoryInDb($data) {
+            // get connection 
+            DAO::connect();
+            $dao = DAO::getBdd();
+            // to make queru
+            $sql = "UPDATE category
+                    SET categoryName = :categoryName,
+                        descriptions = :descriptions
+                    WHERE id_category = :id";
+            // join parameters
+            $param = [
+                ':id' => $data['id'],
+                ':descriptions' => $data['descriptions'],
+                'categoryName' => $data['categoryName']
+            ];
+            // prepare and execute the query
+            $stmt = $dao->prepare($sql);
+            $stmt->execute($param);
+        
+        }
+        
+        // delet category in Bdd
+        public function deleteCategoryById($id){
+            //Use delete method in manager parent class
+            return $this->delete($id);
+        }
+        
+        
+        
+        
     }
 
 ?>

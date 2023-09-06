@@ -25,4 +25,12 @@
 
         }
 
+        //delete topic in Bdd 
+        public function deleteTopicById($id){
+            //Use delete method in manager parent class
+            return $this->delete($id);
+        }
+
+        
+
     }

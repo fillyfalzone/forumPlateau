@@ -4,26 +4,28 @@ $categories = $result["data"]['categories'];
     
 ?>
 
-<h1>liste categories</h1>
+<h1>Liste des catégories</h1>
 
-<table>
+<table style="width: 100%; border-collapse: collapse;">
     <tr>
-        <th>Categories</th>
-        <th>Modifier</th>
-        <th>Supprimer</th>
+        <th style="background-color: #f2f2f2; text-align: left; padding: 10px;">Catégories</th>
+        <th style="background-color: #f2f2f2; text-align: center; padding: 10px;">Modifier</th>
+        <th style="background-color: #f2f2f2; text-align: center; padding: 10px;">Supprimer</th>
     </tr>
-    <!-- looping in categories array to show each category and option to edit and delete -->
-    <?php foreach($categories as $category ) : ?>
+    <!-- Boucle à travers le tableau de catégories pour afficher chaque catégorie avec les options de modification et de suppression -->
+    <?php foreach($categories as $category ) : 
+        $id = $category->getId();
+    ?>
     <tr>
-        <td>
-            <a href="index.php?ctrl=forum&action=showTopicsByCategoryId&id=<?=$category->getId()?>">
+        <td style="border: 1px solid #ddd; padding: 10px;">
+            <a href="index.php?ctrl=forum&action=showTopicsByCategoryId&id=<?= $id ?>">
             <?=$category->getCategoryName()?></a>
         </td>
-        <td>
-            <a href="index.php?ctrl=forum&action=editCategoryById&id=<?=$category->getId()?>"><button>Modifier</button></a>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
+            <a href="index.php?ctrl=forum&action=editCategoryForm&id=<?= $id ?>"><button style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Modifier</button></a>
         </td>
-        <td>
-            <a href="index.php?ctrl=forum&action=deleteCategoryById&id=<?=$category->getId()?>"><button>Supprimer</button></a>
+        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
+            <a href="index.php?ctrl=forum&action=deleteCategoryById&id=<?= $id ?>"><button style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">Supprimer</button></a>
         </td>
     </tr>
     
@@ -32,5 +34,6 @@ $categories = $result["data"]['categories'];
 </table>
 <br>
 
-<a href="index.php?ctrl=forum&action=addCategoryForm"><button>Ajouter une categorie</button></a> 
+<a href="index.php?ctrl=forum&action=addCategoryForm"><button style="background-color: #007BFF; color: white; border: none; padding: 10px 20px; cursor: pointer;">Ajouter une catégorie</button></a>
+
 

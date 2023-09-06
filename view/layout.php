@@ -19,7 +19,8 @@
             <header>
                 <nav>
                     <div id="nav-left">
-                        <a href="/">Accueil</a>
+                        <a href="/" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Accueil</a>
+
                         <?php
                         if(App\Session::isAdmin()){
                             ?>
@@ -40,11 +41,18 @@
                         }
                         else{
                             ?>
-                            <a href="./view/security/login.php">Connexion</a>
-                            <a href="/security/register.html">Inscription</a>
-                            <a href="index.php?ctrl=forum&action=listTopics">la liste des topics</a>
-                            <a href="index.php?ctrl=home&action=listUsers">la liste des users</a>
-                            <a href="index.php?ctrl=forum&action=listCategories">la liste des catégories</a>
+                            <div style="text-align: center; margin-top: 20px;">
+                                 <a href="./view/security/login.php" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Connexion</a>
+    
+                                <a href="/security/register.html" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 3px; text-align: center; display: inline-block;">Inscription</a>
+    
+                                <a href="index.php?ctrl=forum&action=listTopics" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #f44336; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des topics</a>
+    
+                                <a href="index.php?ctrl=home&action=listUsers" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #ff9800; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des utilisateurs</a>
+    
+                                <a href="index.php?ctrl=forum&action=listCategories" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #9c27b0; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des catégories</a>
+                            </div>
+
                         <?php
                         }
                    

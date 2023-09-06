@@ -89,7 +89,7 @@
         /**
          * Get the value of closed
          */ 
-        public function getisLocker()
+        public function getIsLocked()
         {
                 return $this->isLocked;
         }
@@ -99,7 +99,7 @@
          *
          * @return  self
          */ 
-        public function setisLocker($closed)
+        public function setIsLocked($closed)
         {
                 $this->isLocked = $closed;
 

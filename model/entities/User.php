@@ -39,7 +39,7 @@
 
         
         public function __toString(){
-            return "The user e-mail is : " . $this->email;
+            return  $this->pseudo;
         }
     }
 

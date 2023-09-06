@@ -35,6 +35,7 @@
                 )   
             );
         }
+        public static function getBdd(){ return self::$bdd;}
 
         public static function insert($sql, $param){
             try{

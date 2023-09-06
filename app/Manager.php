@@ -65,7 +65,7 @@
                 die();
             }
         }
- 
+        
         public function delete($id){
             $sql = "DELETE FROM ".$this->tableName."
                     WHERE id_".$this->tableName." = :id
@@ -104,5 +104,6 @@
             }
             return false;
         }
+        
     
     }

@@ -7,7 +7,7 @@ final class Category extends Entity {
 
     private $id;
     private $categoryName;
-    private $description;
+    private $descriptions;
 
     public function __construct($data){
         $this->hydrate($data);
@@ -16,12 +16,12 @@ final class Category extends Entity {
     // Getters
     public function getId(){ return $this->id; }
     public function getCategoryName(){ return $this->categoryName; }
-    public function getDescription(){ return $this->description; }
+    public function getDescriptions(){ return $this->descriptions; }
     
     // Setters
     public function setId($id){ $this->id = $id; }
     public function setCategoryName($categoryName){ $this->categoryName = $categoryName; }
-    public function setDescription($description){ $this->description = $description; }
+    public function setDescriptions($descriptions){ $this->descriptions = $descriptions; }
 
     public function __toString(){
         return $this->categoryName;
