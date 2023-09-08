@@ -5,6 +5,7 @@
     use App\Session;
     use App\AbstractController;
     use App\ControllerInterface;
+    use Exception;
     use Model\Managers\TopicManager;
     use Model\Managers\PostManager;
     use Model\Managers\CategoryManager;
@@ -44,10 +45,11 @@
       
         // function to return form view addCategory
        public function addCategoryForm(){
-        return [
-            "view" => VIEW_DIR."forum/categories/addCategory.view.php",
-        ]; 
+            return [
+                "view" => VIEW_DIR."forum/categories/addCategory.view.php",
+            ]; 
        }
+
         // add a new category
         public function addCategory(){
             // get and filter informations send by fomr 
@@ -125,13 +127,18 @@
 
          // show topics by category id from TopicManager
          public function showTopicsByCategoryId($id){
+            $categoryManager = new CategoryManager;
+            $category = $categoryManager->getCategoryById($id);
             //instance a new Topic manager and send the task; 
-            $categoryManager = new TopicManager;
-            $topics = $categoryManager->getTopicsByCategoryId($id);
+            $topicManager = new TopicManager;
+            $topics = $topicManager->getTopicsByCategoryId($id);
             // redirect to topic view page with data 
             return [
                 "view" => VIEW_DIR."forum/topics/topics.view.php",
-                "data" => ["topics" => $topics]
+                "data" => [
+                    "topics" => $topics,
+                    "category" => $category
+                ]
             ];
         }
 
@@ -144,9 +151,7 @@
             $categoryManager = new CategoryManager;
             $category = $categoryManager->getCategoryById($id);
 
-            // echo "<pre>";
-            // print_r($category);
-            // echo "</pre>";
+           
 
             //return view form with category and user data
             return [
@@ -158,20 +163,118 @@
             ]; 
         }
 
+        public function createTopic(){
+            try {
+                // check if post info form are define
+                if (isset($_POST['title']) && isset($_POST['message']) && isset($_POST['user_id']) && isset($_POST['category_id'])){
+                    //clean inputs information
+                    $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $message = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
+                    $user_id = filter_var($_POST['user_id'], FILTER_VALIDATE_INT);
+                    $category_id = filter_var($_POST['category_id'], FILTER_VALIDATE_INT);
 
-        // detele topic by id 
-        public function deteleTopicById(){
-              // check if id is send by url
-              if(isset($_GET['id'])){
-                // filter id to prevent script injection
-                $id = filter_var($_GET['id'], FILTER_VALIDATE_INT); 
-                //instance a new category manager and send the task; 
-                $categoryManager = new TopicManager;
-                $categoryManager->deleteTopicById($id);
+                    //put these infomations in $data array
+                    $dataTopic = [
+                        "title" => $title,
+                        "user_id" => $user_id,
+                        "category_id" => $category_id
+                    ];
+
+                    //call topic manager
+                    $topicManager = new TopicManager;
+                    //add new topic in bdd by add method of parent class manager 
+                    $idTopic = $topicManager->add($dataTopic);
+
+                    $dataPost = [
+                        "message" => $message,
+                        "user_id" => $user_id,
+                        "topic_id" => $idTopic,
+                    ];
+                    //Create in the same time first post
+                    $postManager = new PostManager;
+                    $postManager->add($dataPost);
+                }else{
+                    throw new Exception("form undefine");
+                }
+            } catch (Exception $e) {
+
+                echo $e->getMessage();
             }
+        }
+        // 
+        public function updateTopicForm(){
+            
+            $newId = filter_var($_GET['id'], FILTER_VALIDATE_INT);
 
+            //get topic by id
+            $topicManager = new TopicManager;
+            $topic = $topicManager->findOneById($newId);
+           
+
+            // instance a new User and require all informations in bd
+            $userManager = new UserManager;
+            $user = $userManager->getUserByTopicId($newId); 
+
+           
+
+             // instance a new category and get it by id
+             $categoryManager = new CategoryManager;
+
+             $categories= $categoryManager->findAll();
+             $category = $categoryManager->getCategoryByTopicId($newId);
+
+            //  echo "<pre>";
+            //  print_r($user);
+            //  echo "</pre>";
+            return [
+                "view" => VIEW_DIR."forum/topics/updateTopic.view.php",
+                "data" => [
+                    "topic" => $topic,
+                    "user" => $user,
+                    "category" => $category,
+                    "categories" => $categories
+                    ]
+            ];
         }
 
+        // Update topic informations
+
+        public function updateTopic($id){
+            
+            try{
+                //check if recieved informations are defined
+            if(isset($_POST['title']) && isset($_POST['category-id']) && isset($_POST['adminChangeCategory'])){
+                // filter recieved informations
+                $title = filter_var($_POST['title'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $idTopic = filter_var($_POST['id_topic'], FILTER_VALIDATE_INT);
+                $status = filter_var($_POST['status'], FILTER_VALIDATE_INT);
+                // check if admin change category
+                $categoryId = ($_POST['adminChangeCategory']) ? filter_var($_POST['adminChangeCategory'], FILTER_VALIDATE_INT) : filter_var($_POST['category-id'], FILTER_VALIDATE_INT);
+
+                $topicManager = new TopicManager;
+                $topicManager->updateTopicInBdd($idTopic,$title, $status, $categoryId);
+            }
+            }catch(Exception $e){
+                echo "Update failed: " . $e->getMessage();
+            }
+            
+        }
+           
+        
+
+
+        // detele topic by id 
+        public function deleteTopicById(){
+            // check if id is sent by url
+            if(isset($_GET['id'])){
+                // filter id to prevent script injection
+                $id = filter_var($_GET['id'], FILTER_VALIDATE_INT); 
+                // instance a new topic manager and send the task
+                $topicManager = new TopicManager;
+                $topicManager->deleteTopicById($id);
+            }
+        }
+        
         // POSTS SECTION ---------------------------------------------------------------------------------
 
         

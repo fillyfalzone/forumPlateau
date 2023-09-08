@@ -1,0 +1,140 @@
+-- --------------------------------------------------------
+-- Hôte:                         127.0.0.1
+-- Version du serveur:           8.0.30 - MySQL Community Server - GPL
+-- SE du serveur:                Win64
+-- HeidiSQL Version:             12.1.0.6537
+-- --------------------------------------------------------
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Listage de la structure de la base pour forum_v2
+CREATE DATABASE IF NOT EXISTS `forum_v2` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `forum_v2`;
+
+-- Listage de la structure de table forum_v2. category
+CREATE TABLE IF NOT EXISTS `category` (
+  `id_category` int NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(255) NOT NULL,
+  `descriptions` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id_category`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table forum_v2.category : ~10 rows (environ)
+INSERT INTO `category` (`id_category`, `categoryName`, `descriptions`) VALUES
+	(1, 'REGLEMENT', 'Catégorie réservée aux règlements du forum (veuillez la lire avant de vous inscrire et de contribuer).'),
+	(2, 'PRESENTATION', 'Catégorie réservée à la présentation des membres, pour signaler votre appartenance à la communauté.'),
+	(3, 'HISTOIRE DU CLUB', 'Catégorie réservée à l\'histoire du Chelsea Football Club.'),
+	(4, 'ACTUALITE', 'Catégorie réservée à l\'actualité brûlante du CFC.'),
+	(5, 'LES MATCHS', 'Catégorie réservée aux matchs : donnez votre avis, top et flop, compos idéale, etc'),
+	(6, 'LE MERCATO', 'Catégorie réservée aux transferts du CFC, venez donner votre avis.'),
+	(7, 'INFRASTRUCTURE', 'Infrastructures : Nouveautés, perspectives d\'améliorations, suggestions.'),
+	(8, 'BILAN SAISON', 'Catégorie réservée au bilan de la saison, aux moments mémorables, aux points forts et aux points faibles.'),
+	(9, 'EVENEMENTS', 'Catégorie réservée aux événements : venez partager des moments inoubliables.'),
+	(10, 'BLA-BLATAGE', 'Catégorie réservée aux discussions éphémères, aux joies et aux coups de gueule.');
+
+-- Listage de la structure de table forum_v2. post
+CREATE TABLE IF NOT EXISTS `post` (
+  `id_post` int NOT NULL AUTO_INCREMENT,
+  `message` text,
+  `postDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `topic_id` int DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`id_post`),
+  KEY `FK_post_topic` (`topic_id`),
+  KEY `FK_post_user` (`user_id`),
+  CONSTRAINT `FK_post_topic` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id_topic`),
+  CONSTRAINT `FK_post_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table forum_v2.post : ~14 rows (environ)
+INSERT INTO `post` (`id_post`, `message`, `postDate`, `topic_id`, `user_id`) VALUES
+	(1, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:01:36', 5, 14),
+	(2, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:01:57', 6, 2),
+	(3, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:02:14', 1, 1),
+	(5, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:02:51', 3, 4),
+	(6, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 09:03:04', 4, 5),
+	(7, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 7, 6),
+	(8, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 8, 7),
+	(9, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 9, 8),
+	(12, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 9, 11),
+	(13, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 8, 12),
+	(14, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 7, 11),
+	(15, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 5, 5),
+	(18, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 10, 6),
+	(19, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere eligendi, vero repellendus quisquam animi commodi modi unde veritatis neque ea beatae, fugit, asperiores impedit at quos vitae perspiciatis natus blanditiis.', '2023-09-01 11:03:20', 5, 7);
+
+-- Listage de la structure de table forum_v2. topic
+CREATE TABLE IF NOT EXISTS `topic` (
+  `id_topic` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `creationDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int DEFAULT NULL,
+  `category_id` int DEFAULT NULL,
+  `isLocked` tinyint DEFAULT '0',
+  PRIMARY KEY (`id_topic`),
+  KEY `FK_topic_category` (`category_id`),
+  KEY `FK_topic_user` (`user_id`),
+  CONSTRAINT `FK_topic_category` FOREIGN KEY (`category_id`) REFERENCES `category` (`id_category`) ON DELETE CASCADE,
+  CONSTRAINT `FK_topic_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id_user`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table forum_v2.topic : ~11 rows (environ)
+INSERT INTO `topic` (`id_topic`, `title`, `creationDate`, `user_id`, `category_id`, `isLocked`) VALUES
+	(1, 'Les Légendes', '2023-09-01 10:50:30', 15, 3, 1),
+	(2, 'Le Palmarès', '2023-09-01 08:54:15', 2, 3, 0),
+	(3, 'Présentez-vous', '2023-09-04 08:27:58', 1, 2, 0),
+	(4, 'Soirée gala ', '2023-09-04 08:28:43', 1, 9, 0),
+	(5, 'La Boutique', '2023-09-04 08:29:38', 2, 7, 0),
+	(6, 'Les nouveaux', '2023-09-04 08:29:50', 3, 6, 0),
+	(7, 'Victoire dans la douleur', '2023-09-04 08:30:22', 4, 5, 0),
+	(8, 'Le reglement intérieur', '2023-09-04 08:30:57', 1, 1, 0),
+	(9, 'Le classement', '2023-09-04 08:34:14', 14, 8, 0),
+	(10, 'venez blablater', '2023-09-04 08:34:49', 11, 10, 0),
+	(23, 'L\'actualité brulante', '2023-09-07 13:54:57', 10, 4, 0);
+
+-- Listage de la structure de table forum_v2. user
+CREATE TABLE IF NOT EXISTS `user` (
+  `id_user` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) DEFAULT NULL,
+  `pseudo` varchar(255) DEFAULT NULL,
+  `passWord` varchar(255) DEFAULT NULL,
+  `signUpDate` datetime DEFAULT NULL,
+  `role` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `isBanned` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Listage des données de la table forum_v2.user : ~17 rows (environ)
+INSERT INTO `user` (`id_user`, `email`, `pseudo`, `passWord`, `signUpDate`, `role`, `avatar`, `isBanned`) VALUES
+	(1, 'jules@gmail.com', 'JuliusCesar', '1234', '2023-08-30 16:40:10', NULL, 'avatara.png', 0),
+	(2, 'paul@yahoo.fr', 'Paulo2023', '12345', '2023-08-30 16:54:34', NULL, 'avatarb.png', 0),
+	(3, 'caromb12@chelsea-fc.com', 'CarolineMB12', 'MotDePasse1', '2023-09-01 07:38:46', NULL, 'avatar1.png', 0),
+	(4, 'alexG03@chelsea-fc.com', 'AlexG03', 'MotDePasse2', '2023-09-01 07:38:46', NULL, 'avatar2.png', 0),
+	(5, 'lucyP45@chelsea-fc.com', 'LucyP45', 'MotDePasse3', '2023-09-01 07:38:46', NULL, 'avatar3.png', 0),
+	(6, 'mikeT99@chelsea-fc.com', 'MikeT99', 'MotDePasse4', '2023-09-01 07:38:46', NULL, 'avatar4.png', 0),
+	(7, 'sophieL88@chelsea-fc.com', 'SophieL88', 'MotDePasse5', '2023-09-01 07:38:46', NULL, 'avatar5.png', 0),
+	(8, 'davidH76@chelsea-fc.com', 'DavidH76', 'MotDePasse6', '2023-09-01 07:38:46', NULL, 'avatar6.png', 0),
+	(9, 'oliviaS22@chelsea-fc.com', 'OliviaS22', 'MotDePasse7', '2023-09-01 07:38:46', NULL, 'avatar7.png', 0),
+	(10, 'jamesK11@chelsea-fc.com', 'JamesK11', 'MotDePasse8', '2023-09-01 07:38:46', NULL, 'avatar8.png', 0),
+	(11, 'lauraD67@chelsea-fc.com', 'LauraD67', 'MotDePasse9', '2023-09-01 07:38:46', NULL, 'avatar9.png', 0),
+	(12, 'maxW55@chelsea-fc.com', 'MaxW55', 'MotDePasse10', '2023-09-01 07:38:46', NULL, 'avatar10.png', 0),
+	(13, 'emilyR89@chelsea-fc.com', 'EmilyR89', 'MotDePasse11', '2023-09-01 07:38:46', NULL, 'avatar11.png', 0),
+	(14, 'danielJ33@chelsea-fc.com', 'DanielJ33', 'MotDePasse12', '2023-09-01 07:38:46', NULL, 'avatar12.png', 0),
+	(15, 'sarahC44@chelsea-fc.com', 'SarahC44', 'MotDePasse13', '2023-09-01 07:38:46', NULL, 'avatar13.png', 0),
+	(16, 'williamE78@chelsea-fc.com', 'WilliamE78', 'MotDePasse14', '2023-09-01 07:38:46', NULL, 'avatar14.png', 0),
+	(17, 'juliaM25@chelsea-fc.com', 'JuliaM25', 'MotDePasse15', '2023-09-01 07:38:46', NULL, 'avatar15.png', 0);
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;

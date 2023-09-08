@@ -28,10 +28,7 @@
         }
 
         public function updateCategoryInDb($data) {
-            // get connection 
-            DAO::connect();
-            $dao = DAO::getBdd();
-            // to make queru
+            // make query
             $sql = "UPDATE category
                     SET categoryName = :categoryName,
                         descriptions = :descriptions
@@ -42,9 +39,8 @@
                 ':descriptions' => $data['descriptions'],
                 'categoryName' => $data['categoryName']
             ];
-            // prepare and execute the query
-            $stmt = $dao->prepare($sql);
-            $stmt->execute($param);
+           
+            DAO::update($sql, $param);
         
         }
         
@@ -54,8 +50,19 @@
             return $this->delete($id);
         }
         
-        
-        
+        // get categoty by topic id
+
+        public function getCategoryByTopicId($id){
+            // make query
+            $sql = "SELECT *
+            FROM category c
+            INNER JOIN topic t ON t.category_id = c.id_category
+            WHERE t.id_topic = :id";
+            $param = ['id' => $id];
+
+            return DAO::select($sql, $param, true);
+
+        }
         
     }
 

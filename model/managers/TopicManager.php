@@ -3,6 +3,7 @@
     
     use App\Manager;
     use App\DAO;
+    use PDO;
 
     class TopicManager extends Manager{
 
@@ -24,12 +25,36 @@
                 $this->className);
 
         }
+        // Update category in bdd
+        public function updateTopicInBdd($idTopic, $title, $status, $categoryId){
+
+            $sql = "UPDATE topic
+            SET title = :title, category_id = :category_id
+            WHERE id-topic_id = :id";
+
+            $param = [
+                'id' => $idTopic,
+                'title' => $title,
+                'isLocked' => $status,
+                'category_id' => $categoryId
+            ];
+
+            DAO::update($sql, $param);
+        }
+
 
         //delete topic in Bdd 
-        public function deleteTopicById($id){
-            //Use delete method in manager parent class
-            return $this->delete($id);
+        public function deleteTopicById(int $id){
+            //delete Post of this topic before
+            $sql = "DELETE 
+            FROM post p 
+            WHERE p.topic_id = :id";
+
+            $param = ['id' => $id];
+
+            DAO::delete($sql, $param);
         }
+
 
         
 

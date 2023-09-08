@@ -1,13 +1,14 @@
 
 <?php
 
+use Model\Entities\Category;
+
 $topics = $result["data"]['topics'];
+$category = $result["data"]['category'];
     
 ?>
 
-<h1>liste des topics de la categorie</h1>
-
-
+<h1>liste des topics de la categorie : <?= $category->getCategoryName() ?></h1>
 
 <table style="width: 100%; border-collapse: collapse;">
     <tr>
@@ -43,7 +44,7 @@ $topics = $result["data"]['topics'];
             <?= $status ?></a>
         </td>
         <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
-            <a href="index.php?ctrl=forum&action=editCategoryForm&id=<?= $id ?>"><button style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Modifier</button></a>
+            <a href="index.php?ctrl=forum&action=updateTopicForm&id=<?= $id ?>"><button style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Modifier</button></a>
         </td>
         <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
             <a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $id ?>"><button style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">Supprimer</button></a>
