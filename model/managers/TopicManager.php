@@ -6,7 +6,7 @@
     use PDO;
 
     class TopicManager extends Manager{
-
+        
         protected $className = "Model\Entities\Topic";
         protected $tableName = "topic";
 

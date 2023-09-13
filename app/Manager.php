@@ -33,11 +33,11 @@
 
             $sql = "SELECT *
                     FROM ".$this->tableName." a
-                    WHERE a.id_".$this->tableName." = :id
-                    ";
+                    WHERE a.id_".$this->tableName." = :id";
+            $param = ['id' => $id];
 
             return $this->getOneOrNullResult(
-                DAO::select($sql, ['id' => $id], false), 
+                DAO::select($sql, $param , false), 
                 $this->className
             );
         }
@@ -83,7 +83,8 @@
         protected function getMultipleResults($rows, $class){
 
             if(is_iterable($rows)){
-                return $this->generate($rows, $class);
+                // return $this->generate($rows, $class);
+                return iterator_to_array($this->generate($rows, $class), false);
             }
             else return null;
         }

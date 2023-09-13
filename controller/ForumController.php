@@ -72,6 +72,7 @@
             $categoryManager = new CategoryManager;
             $category = $categoryManager->getCategoryById($id);
 
+
             // require VIEW_DIR."forum/categories/editCategory.view.php"; (another way to redirect to the page)
             return [
                 "view" => VIEW_DIR."forum/categories/editCategory.view.php",
@@ -223,17 +224,9 @@
              $categories= $categoryManager->findAll();
              $category = $categoryManager->getCategoryByTopicId($newId);
 
-            //  echo "<pre>";
-            //  print_r($user);
-            //  echo "</pre>";
             return [
                 "view" => VIEW_DIR."forum/topics/updateTopic.view.php",
-                "data" => [
-                    "topic" => $topic,
-                    "user" => $user,
-                    "category" => $category,
-                    "categories" => $categories
-                    ]
+                "data" => ["topic" => $topic]
             ];
         }
 
@@ -253,11 +246,12 @@
 
                 $topicManager = new TopicManager;
                 $topicManager->updateTopicInBdd($idTopic,$title, $status, $categoryId);
+
+                $this-> redirectTo("forum", "showTopicsByCategoryId", $categoryId);
             }
             }catch(Exception $e){
                 echo "Update failed: " . $e->getMessage();
-            }
-            
+            }  
         }
            
         
@@ -279,17 +273,106 @@
 
         
         // show poste by topic ID
-        public function showPostsByTopicId($id = null) {
+        public function showPostsByTopicId($id) {
             // creat a new instance of Post manager
             $postManager = new PostManager;
             $posts = $postManager->getPostsByTopicId($id);
+
+            $topicManager = new TopicManager;
+            $topic = $topicManager->findOneById($id);
+          
             // redirect to posts view page with data 
             return [
                 "view" => VIEW_DIR."forum/posts/posts.view.php",
-                "data" => ["posts" => $posts]
+                "data" => [
+                    "posts" => $posts,
+                    "topic" => $topic
+                ],
+                "success" => Session::getFlash('success'),
+                "error" => Session::getFlash('error')
             ];
         }
 
+        // add post in topic 
+        public function addPostByTopicId($id){
+            // check if form infos post are defined
+            if(isset($_POST['message']) && isset($_POST['user']) && $_POST['message'] !== null){
+                // filter data received from form 
+                $newMessage = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $user = filter_var($_POST['user'], FILTER_VALIDATE_INT);
+                $topic = filter_var($id, FILTER_VALIDATE_INT);
+                // $postDate = "";
+                // put in data array
+                $data = [
+                    'message' => $newMessage,
+                    // 'postDate' => $postDate,
+                    'topic_id' => $topic,
+                    'user_id' => $user
+                ];
+                // initialize new Post Manager
+                $postManager = new PostManager;
 
+                $postManager->add($data); // add new post in bdd. 
+
+                Session::addFlash('success', 'Votre messages à bien été ajouté');
+                return [
+                    "view" => VIEW_DIR."forum/posts/posts.view.php"   
+                ];
+            }
+
+        }
+        //delete post 
+        public function deletePostById($id){
+            $newId = filter_var($id, FILTER_VALIDATE_INT);
+            // initialize new Post Manager
+            $postManager = new PostManager;
+            //delete post une bdd
+            $postManager->delete($newId);
+
+            return [
+                "view" => VIEW_DIR."forum/posts/posts.view.php",
+            ];
+
+        }
+
+        public function updatePostForm($id){
+
+            $idPost = filter_var($id, FILTER_VALIDATE_INT); 
+            $postManager = new PostManager;
+            $post = $postManager->getPostById($idPost);
+
+            return [
+                "view" => VIEW_DIR . "/forum/posts/updatePostForm.view.php",
+                "data" => ["post" => $post]
+            ];
+        }
+
+        public function updatePost($id){
+            $message = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $idPost = filter_var($id, FILTER_VALIDATE_INT);
+            $postManager = new PostManager;
+            $post = $postManager->findOneById($idPost);
+
+            // check if message is not null 
+            if (!empty($message)){
+                // put data into $data array
+                $data = [
+                    'id_post' => $idPost,
+                    'message' => $message
+                ];
+                //instance new Post manager
+                $postManager = new PostManager;
+
+                $postManager->updatePostInBdd($data);
+            }
+
+            $this-> redirectTo("forum", "showPostsByTopicId", $post->getTopic()->getId());
+        }
+
+
+         //  echo "<pre>";
+            //  print_r($user);
+            //  echo "</pre>";
+            //  die();
 
     }

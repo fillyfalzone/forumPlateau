@@ -14,11 +14,10 @@
 
         public function index(){
             
-           
-                return [
-                    "view" => VIEW_DIR."security/test.php"
-                ];
-            }
+            return [
+                "view" => VIEW_DIR."home.php"
+            ];
+        }
             
         public function listUsers() {
 

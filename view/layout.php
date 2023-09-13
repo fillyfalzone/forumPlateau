@@ -19,7 +19,7 @@
             <header>
                 <nav>
                     <div id="nav-left">
-                        <a href="/" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Accueil</a>
+                        <a href="index.php" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Accueil</a>
 
                         <?php
                         if(App\Session::isAdmin()){
@@ -44,7 +44,7 @@
                             <div style="text-align: center; margin-top: 20px;">
                                  <a href="./view/security/login.php" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Connexion</a>
     
-                                <a href="/security/register.html" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 3px; text-align: center; display: inline-block;">Inscription</a>
+                                <a href="./view/security/register.php" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 3px; text-align: center; display: inline-block;">Inscription</a>
     
                                 <a href="index.php?ctrl=forum&action=listTopics" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #f44336; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des topics</a>
     

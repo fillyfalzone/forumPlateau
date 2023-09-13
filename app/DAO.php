@@ -1,6 +1,8 @@
 <?php
     namespace App;
-    
+
+use PDO;
+
     /**
      * Classe d'accès aux données de la BDD, abstraite
      * 
@@ -35,7 +37,6 @@
                 )   
             );
         }
-        public static function getBdd(){ return self::$bdd;}
 
         public static function insert($sql, $param){
             try{
@@ -95,7 +96,7 @@
                 $stmt = self::$bdd->prepare($sql);
                 $stmt->execute($params);
               
-                $results = ($multiple) ? $stmt->fetchAll() : $stmt->fetch();
+                $results = ($multiple) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : $stmt->fetch();
 
                 $stmt->closeCursor();
                 return ($results == false) ? null : $results;

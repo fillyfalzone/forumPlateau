@@ -16,7 +16,7 @@
     <label for="status" style="font-weight: bold; display: block; margin-bottom: 10px;">Changer le status</label> 
 
     <label for="">Open :</label>
-    <input type="radio" name="status" id="status" value="0">
+    <input type="radio" name="status" id="status" value="0" checked >
     <label for="">Closed :</label>
     <input type="radio" name="status" id="status" value="1"> <br><br>
 

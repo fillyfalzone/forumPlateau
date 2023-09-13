@@ -8,8 +8,8 @@
         private $id;
         private $message;
         private $postDate;
-        private $topic;
-        private $user;
+        private $topic; //objet
+        private $user; //objet
         
         public function __construct($data){
             $this->hydrate($data);

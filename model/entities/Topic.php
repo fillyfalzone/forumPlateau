@@ -7,10 +7,10 @@
         // liste des propriétés de la class topic selon le principe d'encapsulation, (encapsulation: c'est visibilité des propriété d"une classe)
         private $id; 
         private $title;
-        private $user;
+        private $user;  //objet
         private $creationDate;
         private $isLocked;
-        private $category;
+        private $category; //objet
 
         public function __construct($data){         
             $this->hydrate($data); // permet de prendre les donner de la bd et hydrater notre objet       

@@ -23,7 +23,10 @@
         public function getPseudo(){return $this->pseudo;}
         public function getPassWord(){return $this->passWord;}
         public function getSignUpDate(){return $this->signUpDate;}
-        public function getRole(){return $this->role;}
+
+        public function getRole(){
+            return $this->role;
+        }
         public function getAvatar(){return $this->avatar;}
         public function getIsbanned(){return $this->isBanned;}
 
@@ -33,15 +36,34 @@
         public function setPseudo($pseudo){ $this->pseudo = $pseudo;}
         public function setPassWord($passWord){ $this->passWord = $passWord;}
         public function setSignUpDate($signUpDate){ $this->signUpDate = $signUpDate;}
-        public function setRole($role){ $this->role = $role;}
+
+        // public function setRole($role){ 
+        //     // on recupère du JSON
+        //     $this->role = json_decode($role);
+
+        //     // s'il n'y pas de role attitré, on va lui attribuer un role.
+        //     if(empty($this->role)){
+        //         $this->role[] = "ROLE_USER";
+        //     }
+
+        //     return $this;
+        // }
+
         public function setAvatar($avatar){$this->avatar = $avatar;}
+
         public function setIsbanned($isBanned){ $this->isBanned = $isBanned;}
 
         
         public function __toString(){
             return  $this->pseudo;
         }
+
+        public function hasRole($role){
+            //si dans le tableau JSON on trouve un role qui correspond au role en paramètre alors ça va nous return le role.
+            return in_array($role, $this->getRole());
+        }
     }
+
 
 
 ?>
