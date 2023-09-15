@@ -24,9 +24,17 @@
         public function getPassWord(){return $this->passWord;}
         public function getSignUpDate(){return $this->signUpDate;}
 
-        public function getRole(){
-            return $this->role;
-        }
+        /*
+
+        * Get the value of role
+
+        */
+
+       public function getRole(){
+
+            return json_decode($this->role);
+       }
+
         public function getAvatar(){return $this->avatar;}
         public function getIsbanned(){return $this->isBanned;}
 
@@ -37,17 +45,26 @@
         public function setPassWord($passWord){ $this->passWord = $passWord;}
         public function setSignUpDate($signUpDate){ $this->signUpDate = $signUpDate;}
 
-        // public function setRole($role){ 
-        //     // on recupère du JSON
-        //     $this->role = json_decode($role);
+        /**
+    
+         * Set the value of role
+        
+         * @return  self
+         */
 
-        //     // s'il n'y pas de role attitré, on va lui attribuer un role.
-        //     if(empty($this->role)){
-        //         $this->role[] = "ROLE_USER";
-        //     }
+         public function setRole($role)
 
-        //     return $this;
-        // }
+         {
+ 
+                 // on récupère du JSON
+ 
+                $result = $this->role == json_encode($role);
+ 
+                 // s'il n'y a pas de rôles attitrés, on va lui attribuer un rôle
+ 
+                 return $result;
+ 
+         }
 
         public function setAvatar($avatar){$this->avatar = $avatar;}
 
@@ -58,12 +75,31 @@
             return  $this->pseudo;
         }
 
-        public function hasRole($role){
-            //si dans le tableau JSON on trouve un role qui correspond au role en paramètre alors ça va nous return le role.
-            return in_array($role, $this->getRole());
+        public function hasRole($role)
+
+        {
+
+                // si dans le tableau json on trouve un role qui correspond
+                // au rôle envoyé en paramètre, alors cela nous return true
+                // return in_array($role, $this->getRole())
+                $result = $this->getRole() == json_encode($role);
+
+                return $result;
+
+        }
+
+        public function afficherRole() {
+
+            if(in_array("ROLE_ADMIN", $this->getRole())) {
+
+            return "admin";
+
+            } else {
+                return "user";
+
+            }
+
         }
     }
-
-
 
 ?>

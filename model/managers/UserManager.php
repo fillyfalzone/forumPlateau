@@ -43,7 +43,10 @@
         // find user by pseudo in bdd
         public function findUserByPseudo($pseudo){
             // query request to check if pseudo user is in bdd
-            $sql = "SELECT u.pseudo FROM user u  WHERE u.pseudo = :pseudo:";
+            $sql = "SELECT u.pseudo 
+                    FROM user u  
+                    WHERE u.pseudo = :pseudo:";
+
             // link parameters
             $param = ["pseudo" => $pseudo];
             // use select method from DAO class
@@ -55,8 +58,8 @@
         public function findOneByEmail($email) {
 
             $sql = "SELECT *
-                    FROM '.$this->tableName.' u
-                    WHERE u.userEmail = :email";
+                    FROM ".$this->tableName." u
+                    WHERE u.email = :email;";
             $param = ['email' => $email];
             $row = DAO::select($sql, $param, false);
 
@@ -67,7 +70,7 @@
        public function findOneByPseudo($pseudo) {
 
             $sql = "SELECT *
-                    FROM '.$this->tableName.' u
+                    FROM ".$this->tableName." u
                     WHERE u.pseudo = :pseudo";
 
             $param = ['pseudo' => $pseudo];
