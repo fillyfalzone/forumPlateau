@@ -184,6 +184,7 @@
         }
 
         public function createTopic(){
+            // On utilise un fichier 
             try {
                 // check if post info form are define
                 if (isset($_POST['title']) && isset($_POST['message']) && isset($_POST['user_id']) && isset($_POST['category_id'])){
