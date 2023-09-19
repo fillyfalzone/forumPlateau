@@ -325,7 +325,7 @@
                 // put in data array
                 $data = [
                     'message' => $newMessage,
-                    // 'postDate' => $postDate,
+                 
                     'topic_id' => $topic,
                     'user_id' => $user
                 ];
@@ -349,10 +349,7 @@
             //delete post une bdd
             $postManager->delete($newId);
 
-            return [
-                "view" => VIEW_DIR."forum/posts/posts.view.php",
-            ];
-
+            $this->redirectTo();
         }
 
         // method to redirect to update form

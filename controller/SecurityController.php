@@ -17,7 +17,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
             $user = Session::getUser();
 
             return [
-                "view" => VIEW_DIR . "404.php",
+                "view" => VIEW_DIR . "/home.php"
             ];  
         }
 
@@ -231,11 +231,11 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
                             Session::setUser($userInBdd);
 
-                           return [ "view" => VIEW_DIR."home.php"];
+                            $this->redirectTo('home', 'index');
 
                         } else {
 
-                            return [ "view" => VIEW_DIR."home.php"];
+                            $this->redirectTo('home', 'index');
 
                             Session::addFlash('error','Vous êtes banni du forum !!!');
 
@@ -254,11 +254,12 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
             session_destroy();
 
-            return [ "view" => VIEW_DIR."home.php"];
+            $this->redirectTo('security', 'index');
  
         }
 
 
+       // Method qui permet duploader des umages 
        
         public function uploadImage($fileInputName, $targetDirectory) {
             

@@ -53,7 +53,7 @@ header {
     background-position: 50%;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 839px;
+    height: 700px;
     background-color: lightgray;
     display: flex;
     flex-direction: column;
@@ -67,7 +67,7 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 20px;
+    padding: 10px;
     justify-content: space-between;
     background-color: #d9e7f5ed;
 }
@@ -82,13 +82,13 @@ header {
 }
 
 #logo img {
-    width: 100px;
+    width: 75px;
 }
 
 #title {
     color: var(--bleu-fonce);
     font-family: var(--font-title1);
-    font-size: 3vw;
+    font-size: 32px;
     font-style: normal;
     font-weight: 400;
     line-height: normal; 
@@ -127,14 +127,12 @@ header {
     align-items: center;
     justify-content: space-around;
     background-color: #d9e7f5ed;
-    
-
 }
 
 
 #nav-bar ul {
     display: flex;
-    gap: 50px;
+    gap: 30px;
 }
 #nav-bar ul li a {
     color: #272866;
@@ -171,8 +169,9 @@ header {
     border-radius: 10px;
 }
 
+
 /* Styling du main */
-main {
+#home {
     display: grid;
     grid-template-columns: 2.5fr 6fr 2.5fr;
     grid-template-rows: auto;
@@ -196,8 +195,6 @@ aside {
     border-radius: 20px;
     overflow-y: auto;
 }
-
-
 
 h2 {
     text-align: center;
@@ -259,7 +256,7 @@ h2 a {
     cover no-repeat;
 }
 
-/*Styling Center second row*/
+/*Styling Center first row*/
 
 
 
@@ -269,11 +266,11 @@ h2 a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 2px solid var(--bleu-fonce);
     width: 90%;
     height: 80px;
+    border: 2px solid var(--bleu-fonce);
     border-radius: 20px;
-    margin: 20px auto;
+    margin: 15px auto;
     padding: 10px;
 }
 
@@ -296,7 +293,12 @@ h2 a {
 
 
 /*Styling Center second row*/
-#top-categ  {
+#top-categ-list {
+    grid-column: span 3;
+    border: 2px solid var(--bleu-fonce);
+    border-radius: 20px;
+}
+.top-categ  {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -330,4 +332,22 @@ h2 a {
     content: "Topics";
     margin-left: 10px;
 
+}
+
+
+/*Styling Footer*/
+
+footer {
+    text-align: center;
+    background-color: var(--bleu-fonce);
+    color: var(--bleu-claire);
+    border: 2px solid var(--jaune-or);
+    border-radius: 20px;
+}
+
+footer p  {
+    margin: 30px 0;
+}
+footer p a {
+    color: inherit;
 }

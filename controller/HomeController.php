@@ -12,6 +12,9 @@
     
     class HomeController extends AbstractController implements ControllerInterface{
 
+        public  $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
+        public  $pageTitle = "Accueil"; 
+
         public function index(){
             
             $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
@@ -23,7 +26,7 @@
             ];
 
             return [
-                "view" => VIEW_DIR."home.php",
+                "view" => VIEW_DIR."/home.php",
                 "data" => $data
             ];
         }

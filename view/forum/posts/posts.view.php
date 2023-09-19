@@ -3,6 +3,7 @@
 
 $posts = $result['data']['posts'];
 $topic = $result['data']['topic']; 
+
 ?>
 
 <h1 style="text-align: center; font-family: Arial, sans-serif; font-size: 24px;">Liste des Posts du topic : <?= $topic->getTitle()  ?></h1>
@@ -46,7 +47,7 @@ $topic = $result['data']['topic'];
     <input type="submit" value="Ajouter un message" style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">
 
     <!-- envoyer en post l'id du user qui add le nouveau "post : message" -->
-    <input type="hidden" name="user" value="<?= $userId ?>">
+    <input type="hidden" name="user" value="<?= $post->getUser()->getId()?>">
 </form> 
        
 

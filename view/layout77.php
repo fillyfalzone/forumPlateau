@@ -1,5 +1,7 @@
+
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +9,27 @@
     <meta name="keywords" content="Chelsea fc, sport, premiere league, football ">
     <meta name="description" content="<?= $descriptionContent ?>">
     <script src="https://cdn.tiny.cloud/1/zg3mwraazn1b2ezih16je1tc6z7gwp5yd4pod06ae5uai8pa/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-     <!-- import de la police Kumar One -->
-     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kumar+One&display=swap');
-    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="./public/css/forum.css">
+    <link rel="stylesheet" href="<?= PUBLIC_DIR ?>./css/forum.css">
     <title><?= $pageTitle ?></title>
 </head>
-
 <body>
-    <div id="wrapper">
-        <header>
-            <div id="top-bar">
-    
-                <div id="logo">
-                    <img src=".<?=PUBLIC_DIR ?>/images/logo.png" alt="image-logo">
-                    <H1 id="title"> CHELSEA FC FANBASE</H1>
-                </div>
-    
-                <ul id="register-login">
+    <header>
+        <nav id="nav-bar">
+            <div id="nav-left">
+                <a href="index.php" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Accueil</a>
 
                 <?php
+                if(App\Session::isAdmin()){
+                    ?>
+                    <a href="index.php?ctrl=home&action=users" rel="nofollow" >Voir la liste des gens</a>
+                    
+                    <?php
+                }
+                ?>
+            </div>
+            <div id="nav-right">
+            <?php
                 
                 if(App\Session::getUser()){
                     ?>
@@ -38,44 +39,30 @@
                 }
                 else{
                     ?>
-                    
-                    <li id="register"> <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a></li>
-                    <li id="login"><a href="index.php?ctrl=security&action=loginForm">Se connecter</a></li>
+                    <div style="text-align: center; margin-top: 20px;">
+                        <a href="index.php?ctrl=security&action=loginForm" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #007BFF; color: white; border-radius: 3px; text-align: center; display: inline-block;">Connexion</a>
+
+                        <a href="index.php?ctrl=security&action=registerForm" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 3px; text-align: center; display: inline-block;">Inscription</a>
+
+                        <a href="index.php?ctrl=security&action=logout" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #f44336; color: white; border-radius: 3px; text-align: center; display: inline-block;">Deconnexion</a>
+
+                        <a href="index.php?ctrl=forum&action=listTopics" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #0f4336; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des topics</a>
+
+                        <a href="index.php?ctrl=home&action=listUsers" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #ff9800; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des utilisateurs</a>
+
+                        <a href="index.php?ctrl=forum&action=listCategories" style="text-decoration: none; margin: 10px; padding: 10px 20px; background-color: #9c27b0; color: white; border-radius: 3px; text-align: center; display: inline-block;">La liste des catégories</a>
+                    </div>
 
                 <?php
                 }
  
-                ?>
-
-                </ul>
+            ?>
             </div>
+        </nav>
+    </header>
 
-    
-            <nav id="nav-bar">
-                <div id="home">
-                    <a href="index.php"><img src=".<?=PUBLIC_DIR ?>/images/home.svg" alt="home"></a>
-                </div>
-                <ul>
-                    <li><a href="">Actualité</a></li>
-                    <li><a href="">Equipe</a></li>
-                    <li><a href="index.php?ctrl=forum&action=listCategories">catégories</a></li>
-                 <?php
-                if(App\Session::isAdmin()){
-                ?>
-                   <li><a href="index.php?ctrl=home&action=users" rel="nofollow">Liste des utilisateurs</a></li>
-                    
-                <?php
-                }
-                ?>
-                    
-                </ul>
-                <form action="#" method="post" id="header-form">
-                    <input type="search" name="search" placeholder="Rechercher..." id="search">
-                    <input type="submit" id="submit" value="">
-                </form>
-            </nav>
-        </header>
-
+    <div id="wrapper"> 
+       
         <div id="mainpage">
             <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
             <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
@@ -85,19 +72,13 @@
                 <?= $page ?>
             </main>
         </div>
-
-
-           
-        
-
-        <footer>
-            <footer>
-                <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a> - <a href="">sitemap</a></p>
-                <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
-            </footer>
-        </footer>
     </div>
 
+        <footer>
+            <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a> - <a href="">sitemap</a></p>
+            <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
+        </footer>
+   
 
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -148,6 +129,5 @@
             )
         })*/
     </script>
-    
 </body>
 </html>

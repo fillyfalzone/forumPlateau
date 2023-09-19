@@ -31,7 +31,7 @@
         */
 
        public function getRole(){
-
+            // On utilise Json decode parceque
             return json_decode($this->role);
        }
 
