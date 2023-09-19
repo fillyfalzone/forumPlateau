@@ -52,30 +52,11 @@
          * @return  self
          */
 
-        //  public function setRole($role)
-
-        //  {
- 
-        //          // on récupère du JSON
- 
-        //         $this->role == json_encode($role);
- 
-        //          // s'il n'y a pas de rôles attitrés, on va lui attribuer un rôle
- 
-        //          return $this;
- 
-        //  }
+    
 
         public function setRole($role){
             $this->role = $role;
-            // // Vérifiez d'abord si $role est un tableau
-            // if (is_array($role)) {
-            //     // Encodez le tableau en JSON et attribuez-le à la propriété $role
-            //     $this->role = json_encode($role);
-            // }
-            // // S'il n'est pas un tableau, vous pouvez gérer cette situation en conséquence
-            // // (par exemple, attribuer un rôle par défaut ou générer une erreur).
-            // return $this;
+       
         }
 
 
@@ -100,7 +81,7 @@
         }
 
         public function afficherRole() {
-
+            
             if(in_array("ROLE_ADMIN", $this->getRole())) {
 
             return "admin";

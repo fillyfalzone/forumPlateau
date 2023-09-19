@@ -355,6 +355,7 @@
 
         }
 
+        // method to redirect to update form
         public function updatePostForm($id){
 
             $idPost = filter_var($id, FILTER_VALIDATE_INT); 
@@ -367,6 +368,7 @@
             ];
         }
 
+        // method to update post 
         public function updatePost($id){
             $message = filter_var($_POST['message'], FILTER_SANITIZE_SPECIAL_CHARS);
             $idPost = filter_var($id, FILTER_VALIDATE_INT);
@@ -388,11 +390,5 @@
 
             $this-> redirectTo("forum", "showPostsByTopicId", $post->getTopic()->getId());
         }
-
-
-         //  echo "<pre>";
-            //  print_r($user);
-            //  echo "</pre>";
-            //  die();
 
     }
