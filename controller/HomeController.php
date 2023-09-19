@@ -14,8 +14,17 @@
 
         public function index(){
             
+            $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
+            $pageTitle = "Accueil"; 
+
+            $data = [
+                'descriptionContent' => $descriptionContent,
+                'pageTitle' => $pageTitle
+            ];
+
             return [
-                "view" => VIEW_DIR."home.php"
+                "view" => VIEW_DIR."home.php",
+                "data" => $data
             ];
         }
             

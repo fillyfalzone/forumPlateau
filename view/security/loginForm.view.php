@@ -3,7 +3,7 @@
 <h1 style="font-family: Arial, sans-serif; color: #333; text-align: center;">Connexion</h1>
 
 
-<form action="././index.php?ctrl=security&action=login" method="POST" style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
+<form action="../../index.php?ctrl=security&action=login" method="POST" style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);">
        
     <label for="pseudo" style="display: block; margin-bottom: 10px; font-weight: bold;">Pseudo :</label>
 

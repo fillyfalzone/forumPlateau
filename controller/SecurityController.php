@@ -6,7 +6,7 @@ use App\Session;
 use App\AbstractController;
 use App\ControllerInterface;
 use Model\Managers\UserManager;
-use Service\FunctionPerso;
+
 
 class SecurityController extends AbstractController implements ControllerInterface{
     
@@ -43,6 +43,9 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
             return [
                 "view" => VIEW_DIR."/security/registerForm.php",
+                "data" => [
+                    "successMessage" => Session::getFlash('success'),
+                    "errorMessage" => Session::getFlash('error')]
             ];
         }
 
@@ -68,47 +71,46 @@ class SecurityController extends AbstractController implements ControllerInterfa
              * PASSWORD_DEFAULT - Use the bcrypt algorithm (default as of PHP 5.5.0). Note that this constant is designed to change over time as new and stronger algorithms are added to PHP. For that reason, the length of the result from using this identifier can change over time. Therefore, it is recommended to store the result in a database column that can expand beyond 60 characters (255 characters would be a good choice).
 
              */
+           
+            if( $pseudo && $email && $passWord && $confirmPassWord && $conditions) {
 
-             
- 
-            if( $pseudo && $email && $passWord && $confirmPassWord) {
-
-             
+                // instancie un UserManager
                 $userManager = new UserManager();
+
+                 // on doit d'abord rechercher si le Mail et le pseudo  existe en BDD
                 $userPseudoBdd = $userManager->findOneByPseudo($pseudo);
                 $userEmailBdd = $userManager->findOneByEmail($email);
 
-                // on doit d'abord rechercher si le userEmail existe en BDD
-
+               
                 if(!$userPseudoBdd && !$userEmailBdd) {
 
-              
                     // si c'est false on poursuit
 
-                    // if($_FILES['avatar'] !== null){
+                    // on verifie si l'utilisateur à charger une image à l'inscription
 
-                    //     // Utilisation de la fonction  uploadImage:
-                    //     $directory = 'public/imgs/';
-                    //     $fileInput = $_FILES['avatar'];
+                    $fileInput = $_FILES['avatar'];  
                     
+                    if ($fileInput === true){
 
-                    //     $fileName = $this->uploadImage($fileInput, $directory);
+                        //on definie le dossier de direction des fichiers images
+                        $targetDirectory = "././public/uploads/";
 
-                    //     if ($fileName !== false) {
-
-                    //         return $fileName; 
-                    //     } else {
-                    //         // Le téléchargement de l'image a échoué, affichez un message d'erreur ou prenez d'autres mesures nécessaires.
-                    //         return "Le téléchargement de l'image a échoué. Veuillez réessayer."; 
-                    //     }
-                    
-                    // } else {
-                    //     $fileName = "avatar"; 
-                    // }
+                        /* 
+                            * Grace à la fonction de traitement de fichier définie plus bas, 
+                                - verifie, l'extension,
+                                - crée un nom unique,
+                                - vérifie le poids de l'image,
+                                - et l'enreigistre dans le repertoire defini.
+                        */
+                        $avatar = $this->uploadImage($_FILES['avatar'], $targetDirectory);    
+                    } else {
+                        // si le user de charge pas une image, on met l'image par defaut 
+                        $avatar = "avatar.png";
+                    }
 
                     // si le password correspond au confirmPassword et que la longueur de la chaîne de caractère du password est supérieur ou égale à 12
                     if(($passWord == $confirmPassWord) && (strlen($passWord) >= 6 )) {
-                       
+                    
                         // On va hasher le password et enregistrer le user en BDD
 
                         // un password est hashé en BDD. Le hashage est un mécanisme unidirectionnel et irréversible. ON NE DEHASHE JAMAIS UN PASSWORD!!!
@@ -134,24 +136,29 @@ class SecurityController extends AbstractController implements ControllerInterfa
                         // si un pirate récupère notre password hashé il aura plus de difficulté à découvrir notre MDP d'origine
 
                         // $password_hash2 = md5($password);
-                      
-                        echo "<pre>";
-                        var_dump($pseudo);
-                        var_dump($email);
-                        var_dump($passWordHash);
-                        // var_dump($nameFile);
-                        echo "</pre>";
-                       
-            
-                       
-                        $userManager->add(['pseudo' => $pseudo, 'email' => $email, 'passWord' => $passWordHash, 'role' => json_decode("ROLE_USER") ]);
 
-                        // die('hello2');
+                       // Ici on regroupe tout les données d'inputs reçues
+                        $data = [
+                            'pseudo' => $pseudo,
+                            'email' => $email,
+                            'passWord' => $passWordHash,
+                            'avatar' => $avatar,
+                            'role' => json_encode(["ROLE_USER"]) // Utilisez json_encode pour convertir un tableau PHP en chaîne JSON valide
+                        ];
+
+                        // On ajoute un nouveau utilisateur dans la bdd
+
+                        $userManager->add($data);
                         
+                        // On redirige l'e User vers la page d'inscription.
                         $this->redirectTo("security", "loginForm");
 
                     } else {
+                        
+                        // On redirige l'e User vers la page d'inscription.
+                        $this->redirectTo("security", "registerForm");
 
+                        // Si les mots de pass ne sont pas identiques on renvoi un flash
                         Session::addFlash('error', 'Les mots de passe ne sont pas identiques ou pas assez long');
 
                     }
@@ -243,7 +250,7 @@ class SecurityController extends AbstractController implements ControllerInterfa
  
         public function logout() {
 
-            session_start();
+            // session_start();
 
             session_destroy();
 
@@ -254,37 +261,40 @@ class SecurityController extends AbstractController implements ControllerInterfa
 
        
         public function uploadImage($fileInputName, $targetDirectory) {
-            // Vérifier si un fichier a été téléchargé
-            if (!isset($_FILES[$fileInputName]) || $_FILES[$fileInputName]['error'] === UPLOAD_ERR_NO_FILE) {
-                return false; // Aucun fichier téléchargé
-            }
-
+            
             // Vérifier si le fichier est une image
-            $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-            $fileExtension = strtolower(pathinfo($_FILES[$fileInputName]['name'], PATHINFO_EXTENSION));
-            if (!in_array($fileExtension, $allowedExtensions)) {
-                return false; // Le fichier n'est pas une image
-            }
+            $allowedMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            $fileMimeType = mime_content_type($fileInputName['tmp_name']);
+            if (!in_array($fileMimeType, $allowedMimeTypes)) {
 
-            // Vérifier la taille de l'image (par exemple, 5 Mo)
+                Session::addFlash('success', 'Le fichier n\'est pas une image ou  n\'est pas géré'); 
+                return false; 
+            }
+        
+            // Vérifier la taille de l'image (5 Mo)
             $maxFileSize = 5 * 1024 * 1024; // 5 Mo en octets
-            if ($_FILES[$fileInputName]['size'] > $maxFileSize) {
+            if ($fileInputName['size'] > $maxFileSize) {
+
+                Session::addFlash('success', 'Le poids du fichier doit est inferieur à 5 Mo'); 
+
                 return false; // Le fichier est trop volumineux
             }
-
-            // Générer un nom de fichier unique
-            $randomFileName = uniqid() . '.' . $fileExtension;
-
+        
+            // Générer un nom de fichier unique basé sur l'horodatage et une partie aléatoire
+            $randomFileName = md5(uniqid(rand(), true)) . '.' . pathinfo($fileInputName['name'], PATHINFO_EXTENSION);
+        
             // Chemin complet du fichier de destination
             $targetFilePath = $targetDirectory . $randomFileName;
-
+        
             // Déplacer le fichier téléchargé vers le répertoire de destination
-            if (move_uploaded_file($_FILES[$fileInputName]['tmp_name'], $targetFilePath)) {
+            if (move_uploaded_file($fileInputName['tmp_name'], $targetFilePath)) {
                 return $randomFileName; // Succès, retourner le nom du fichier pour enregistrement en BDD
             } else {
+                Session::addFlash('success', 'Échec du déplacement du fichier '); 
                 return false; // Échec du déplacement du fichier
             }
         }
+        
 
    
     

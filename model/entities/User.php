@@ -52,19 +52,32 @@
          * @return  self
          */
 
-         public function setRole($role)
+        //  public function setRole($role)
 
-         {
+        //  {
  
-                 // on récupère du JSON
+        //          // on récupère du JSON
  
-                $result = $this->role == json_encode($role);
+        //         $this->role == json_encode($role);
  
-                 // s'il n'y a pas de rôles attitrés, on va lui attribuer un rôle
+        //          // s'il n'y a pas de rôles attitrés, on va lui attribuer un rôle
  
-                 return $result;
+        //          return $this;
  
-         }
+        //  }
+
+        public function setRole($role){
+            $this->role = $role;
+            // // Vérifiez d'abord si $role est un tableau
+            // if (is_array($role)) {
+            //     // Encodez le tableau en JSON et attribuez-le à la propriété $role
+            //     $this->role = json_encode($role);
+            // }
+            // // S'il n'est pas un tableau, vous pouvez gérer cette situation en conséquence
+            // // (par exemple, attribuer un rôle par défaut ou générer une erreur).
+            // return $this;
+        }
+
 
         public function setAvatar($avatar){$this->avatar = $avatar;}
 
@@ -78,10 +91,8 @@
         public function hasRole($role)
 
         {
-
                 // si dans le tableau json on trouve un role qui correspond
                 // au rôle envoyé en paramètre, alors cela nous return true
-                // return in_array($role, $this->getRole())
                 $result = $this->getRole() == json_encode($role);
 
                 return $result;

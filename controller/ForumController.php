@@ -17,12 +17,20 @@
         public function index(){
         
            $topicManager = new TopicManager();
+
+           $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
+           $pageTitle = "Accueil"; 
+
+           $data = [
+               'descriptionContent' => $descriptionContent,
+               'pageTitle' => $pageTitle,
+               "topics" => $topicManager->findAll(["creationdate", "DESC"])
+           ];
+
             
             return [
                 "view" => VIEW_DIR."forum/topics/listTopics.php",
-                "data" => [
-                    "topics" => $topicManager->findAll(["creationdate", "DESC"])
-                ]
+                "data" => $data
             ];
         
         }
@@ -32,14 +40,25 @@
 
         // function to show list categories 
         public function listCategories(){
+             /*Les deux variables pour permettent de mettre à jour le titre de la page et la description*/
+             $descriptionContent = "Vous avez ici la liste des categories du forum"; 
+             $pageTitle = "Liste des catégories"; 
             
+             //
             $categoryManager = new CategoryManager;
 
             $categories = $categoryManager->findAll();
+           
+ 
+            $data = [
+                'descriptionContent' => $descriptionContent,
+                'pageTitle' => $pageTitle,
+                'categories' => $categories
+            ];
 
             return [
                 "view" => VIEW_DIR."forum/categories/listCategories.php",
-                "data" => ["categories" => $categories]
+                "data" => $data
             ];
         }
       

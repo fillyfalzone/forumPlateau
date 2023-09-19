@@ -1,6 +1,8 @@
 <?php
 
 $categories = $result["data"]['categories'];
+$descriptionContent = $result['data']['descriptionContent'];
+$pageTitle = $result['data']['pageTitle'];
     
 ?>
 

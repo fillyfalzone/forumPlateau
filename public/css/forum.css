@@ -1,0 +1,333 @@
+
+/*
+    * Générale
+        - On va comme commencé par reset les marges, et la taille des conteneur à 0
+        - On supprime les soulignement sous les liens,
+        - On suprime les puces sur les listes
+
+*/
+
+*, ::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+/*On initialise les variable des couleurs*/
+:root {
+    --bleu-fonce : #001489;
+    --bleu-claire : #D9E7F5;
+    --rouge-perso : #C5150C;
+    --jaune-or : #DBA111;
+    --font-title1 : 'Kumar One', serif;
+    --font-text : 'Inter', sans-serif; 
+}
+
+html {
+    font-size: 16px;
+    font-family: var(--font-text);
+}
+
+/*Body*/
+
+
+/* On definie la  largeur du Wrapper et on le centre sur les écrans plus larges*/
+
+#wrapper {
+   max-width: 1440px;
+   margin: 0 auto; 
+}
+
+/*Header*/
+
+header {
+    background-image: linear-gradient(104deg, rgba(0, 116, 252, 0.20) 3.55%, rgba(235, 171, 5, 0.12) 51.19%, rgba(255, 0, 0, 0.13) 97.25%), url(../images/banner.jpg);
+    background-position: 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 839px;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+    
+/*On va styliser la top-bar qui comporte le logo, le Titre, les lien register et login*/
+
+#top-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+    justify-content: space-between;
+    background-color: #d9e7f5ed;
+}
+
+/*On cale bien l'image du logo et le Titre*/
+
+#logo {
+    margin-left: 5vw;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#logo img {
+    width: 100px;
+}
+
+#title {
+    color: var(--bleu-fonce);
+    font-family: var(--font-title1);
+    font-size: 3vw;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal; 
+}
+
+/*On stylise les liens register et login*/
+#register-login {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-right: 5vw;
+}
+
+#register {
+    color: var(--rouge-perso);
+    font-family: var(--font-text);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+#login {
+    color: var(--bleu-fonce);
+    font-family: var(--font-text);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+/*on va faire le style de la nav-bar*/
+#nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #d9e7f5ed;
+    
+
+}
+
+
+#nav-bar ul {
+    display: flex;
+    gap: 50px;
+}
+#nav-bar ul li a {
+    color: #272866;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal; 
+}
+
+#header-form {
+    display: flex;
+    padding: 10px 7px 10px 13px;
+    justify-content:flex-end ;
+    align-items: center;
+    gap: 10px;
+    border-radius: 20px;
+    border: none;
+    background: #D9E7F5;
+}
+
+#header-form input[type~="search"] {
+    width: 370px;
+    height: 50px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 20px;
+    background: #fdfdfd;
+}
+    
+#header-form input[type~="submit"] {
+    width: 50px;
+    height: 50px;
+    background: url(../images/search\ .svg) center center/ cover no-repeat;
+    border-radius: 10px;
+}
+
+/* Styling du main */
+main {
+    display: grid;
+    grid-template-columns: 2.5fr 6fr 2.5fr;
+    grid-template-rows: auto;
+    gap: 60px;
+    padding: 30px 0;
+
+}
+
+aside {
+    width: 100%; /* Utilisation de 100% pour l'adaptabilité */
+    height: 480px;
+    border: 2px solid var(--bleu-fonce);
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+.center {
+    width: 100%; /* Utilisation de 100% pour l'adaptabilité */
+    height: 480px;
+    border: 2px solid var(--bleu-fonce);
+    border-radius: 20px;
+    overflow-y: auto;
+}
+
+
+
+h2 {
+    text-align: center;
+    color: #DBA111;
+    font-family: var(--font-text);
+    font-size: 24px;
+    font-weight: 700;
+    background-color:   var(--bleu-fonce);
+    border-radius: 18px 18px 0 0;
+    padding: 15px;
+}
+
+h2 a {
+    color: #DBA111;
+}
+
+
+/* styling aside left first row pseudo*/
+
+#main-avatar {
+    display:block;
+    margin: auto;
+    width: 150px;
+    height: 150px;
+}
+
+#pseudo ul li {
+    width: 90%;
+    margin: 15px auto;
+    border: 2px solid var(--bleu-fonce);
+    border-radius: 10px; 
+}
+
+#pseudo ul li a {
+    display: inline-block;
+    padding: 15px 10px;
+    color: var(--bleu-fonce);
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#pseudo ul li a::before {
+    display: inline-block;
+    content: "";
+    width: 30px;
+    height: 30px;
+    background: url(../images/profile-circle.svg) center center/
+    cover no-repeat;
+    vertical-align: middle;
+    margin-top: -6px;
+    margin-right: 5px;
+}
+#pseudo ul li:nth-child(2) a::before {
+    background: url(../images/message.svg) center center/
+    cover no-repeat;
+}
+#pseudo ul li:nth-child(3) a::before {
+    background: url(../images/statistique.svg) center center/
+    cover no-repeat;
+}
+
+/*Styling Center second row*/
+
+
+
+/*styling de l'aside right first row top contributeurs*/
+
+#top-user {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--bleu-fonce);
+    width: 90%;
+    height: 80px;
+    border-radius: 20px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+#top-user a {
+    color: var(--bleu-fonce);
+    font-size: 16px;
+    font-weight: 700;
+}
+#top-user span {
+    color: var(--bleu-fonce);
+    font-size: 12px;
+}
+#top-user span::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: url(../images/post.svg) center center / cover no-repeat;
+}
+
+
+/*Styling Center second row*/
+#top-categ  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid var(--jaune-or);
+    border-radius: 40px;
+    background-color: var(--bleu-fonce);
+    color: var(--bleu-claire);
+    width: 80%;
+    margin: 15px auto;
+    padding: 10;
+}
+
+ .categ-name a {
+    color: inherit;
+}
+
+.categ-name a::before {
+    display: inline-block;
+    content: "";
+    width: 60px;
+    height: 80px;
+    background: url(../images/stack.svg) center center / cover no-repeat;
+    vertical-align: middle;
+    margin-right: 30px;
+
+}
+
+.nb-topics::after {
+    display: inline-block;
+    content: "Topics";
+    margin-left: 10px;
+
+}
