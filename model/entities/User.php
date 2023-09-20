@@ -51,20 +51,13 @@
         
          * @return  self
          */
-
-<<<<<<< HEAD
     
 
-        public function setRole($role){
-            $this->role = $role;
-       
-=======
+
 
 
         public function setRole($role){
             $this->role = $role;
-      
->>>>>>> 7467a48dc5b8127bcb813bffa448e013d38c800a
         }
 
 
@@ -77,9 +70,7 @@
             return  $this->pseudo;
         }
 
-        public function hasRole($role)
-
-        {
+        public function hasRole($role) {
                 // si dans le tableau json on trouve un role qui correspond
                 // au rôle envoyé en paramètre, alors cela nous return true
                 $result = $this->getRole() == json_encode($role);
@@ -87,24 +78,5 @@
                 return $result;
 
         }
-
-        //Method pour afficher le role 
-        public function afficherRole() {
-<<<<<<< HEAD
-            
-=======
-            // on verifie si le Role_admin est dans le tableau de role
->>>>>>> 7467a48dc5b8127bcb813bffa448e013d38c800a
-            if(in_array("ROLE_ADMIN", $this->getRole())) {
-            // si oui on affiche le role admin
-            return "admin";
-            //sinon c'est user 
-            } else {
-                return "user";
-
-            }
-
-        }
-    }
-
+    }  
 ?>

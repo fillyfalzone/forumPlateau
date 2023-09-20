@@ -11,7 +11,7 @@ $category = $result['data']['category'];
     <input type="text" name="categoryName" id="categoryName" value="<?= $category->getCategoryName() ?>" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px;">
     
     <label for="descriptions" style="display: block; font-weight: bold;">Description de la catégorie :</label>
-    <textarea name="descriptions" id="descriptions" cols="30" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px; resize: vertical; min-height: 100px; max-height: 300px;"></textarea>
+    <textarea name="descriptions" id="descriptions" cols="30" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px; resize: vertical; min-height: 100px; max-height: 300px;"><?= $category->getDescriptions() ?></textarea>
     
     <input type="hidden" name="id" value="<?= $category->getId() ?>">
     <input type="submit" value="Valider" style="background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">

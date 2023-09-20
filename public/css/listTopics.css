@@ -8,12 +8,12 @@
     --font-text : 'Inter', sans-serif; 
 }
 
-#categ-list{
+#topic-list{
     padding: 30px 0;
 
 }
 
-#categ-list h2{
+#topic-list h2{
     border-radius: 20px;
     border: 2px solid var(--jaune-or);
 }
@@ -25,7 +25,7 @@ h2 a {
 
 /*La bulle Categorie*/
 
-.categ {
+.topic {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,76 +40,88 @@ h2 a {
 
 /*In category left*/
 
-.categ-left {
+.topic-left {
    display: flex;
    gap: 20px;
    align-items: center;
 }
-.icon-categ{
-    width: 80px;
-    height: 80px;
-    background: url(../images/stack-jaune.svg) center center / cover no-repeat;
+.icon-topic img {
+    border-radius: 30px;
 }
 
-.categ-name{
+.topic-title{
     margin-bottom: 15px;
 }
-.categ-name a {
+.topic-title a {
     color: var(--jaune-or);
     font-size: 1.5rem;
 }
-.categ-name a:hover {
+.topic-title a:hover {
     text-decoration: underline;
 }
 
-.descriptions span {
-    text-transform: capitalize;
-    font-weight: 700;
+.postedBy a {
+    font-weight: 600;
+    color: var(--bleu-claire);
 }
 
 /*In category right*/
 
-.categ-right {
+.topic-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
 /*nbTopics indice*/
 
-.nbTopics {
+.nbPosts {
     display: block;
     color: var(--bleu-claire);
     text-align: center;
 }
 
-.nbTopics::after {
-    content: "Topics";
+.nbPosts::before {
+    content: "";
     display: block;
-    margin-left: -5px;
+    width: 30px;
+    height: 30px;
+    background: url(../images/msg.svg) center center / cover no-repeat;
 }
 
 .edit {
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: url(../images/edit.svg) center center / cover no-repeat;
 }
 
 .delete {
     display: block;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     background: url(../images/delete.svg) center center / cover no-repeat;
+}
+.open {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url(../images/padlock-open.svg) center center / cover no-repeat;
+}
+.closed {
+    display: block;
+    width: 30px;
+    height: 30px;
+    background: url(../images/padlock-closed.svg) center center / cover no-repeat;
 }
 
 /* Style de base pour le bouton */
-.add-categ {
+.add-topic {
     display: block;
     width: fit-content;
     margin: 10px auto;
 }
-.add-categ button {
+.add-topic button {
     background-color: #001489;
     color: #D9E7F5;
     border: none;
@@ -120,7 +132,7 @@ h2 a {
   }
   
   /* Animation au survol du bouton */
-  .add-categ button:hover {
+  .add-topic button:hover {
     background-color: #D9E7F5;
     color: #001489;
     transform: scale(1.05); /* Augmente légèrement la taille au survol */

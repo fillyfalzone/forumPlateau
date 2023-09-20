@@ -15,21 +15,18 @@
 
         // redirection function to list topics if a page is unknown.  
         public function index(){
-        
-           $topicManager = new TopicManager();
-
-           $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
-           $pageTitle = "Accueil"; 
+            
+             /*Les deux variables pour permettent de mettre à jour le titre de la page et la description*/
+            $descriptionContent = "Bienvenue sur la page d'accueil du Forum Chelsea FC FanBase"; 
+            $pageTitle = "Accueil"; 
 
            $data = [
                'descriptionContent' => $descriptionContent,
-               'pageTitle' => $pageTitle,
-               "topics" => $topicManager->findAll(["creationdate", "DESC"])
+               'pageTitle' => $pageTitle
            ];
 
-            
             return [
-                "view" => VIEW_DIR."forum/topics/listTopics.php",
+                "view" => VIEW_DIR."forum/home.php",
                 "data" => $data
             ];
         
@@ -82,6 +79,8 @@
             // instencied a new category manager to send data to categoryManager 
             $categoryManager = new CategoryManager;
             $categoryManager->addCategoryInDb($data); 
+
+            return $this->redirectTo("forum", "listCategories");
         }
 
 
@@ -121,6 +120,8 @@
                     // instencied a new category manager to send data to categoryManager 
                     $categoryManager = new CategoryManager;
                     $categoryManager->updateCategoryInDb($data);
+                    // redirection vers la liste des catégories
+                    return $this->redirectTo("forum", "listCategories");
                 } else {
                     throw new \Exception("La catégorie n'existe pas");
                 }
@@ -137,6 +138,9 @@
                 //instance a new category manager and send the task; 
                 $categoryManager = new CategoryManager;
                 $categoryManager->deleteCategoryById($id);
+
+                 // redirection vers la liste des catégories
+                return $this->redirectTo("forum", "listCategories");
 
             }
         }

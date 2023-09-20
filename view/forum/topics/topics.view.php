@@ -1,3 +1,4 @@
+<link rel="stylesheet" href=".<?= PUBLIC_DIR ?>/css/listTopics.css">
 
 <?php
 use Model\Entities\Category;
@@ -5,52 +6,64 @@ $topics = $result["data"]['topics'];
 $category = $result["data"]['category'];
 ?>
 
-<h1>liste des topics de la categorie : <?=$category->getCategoryName();?> </h1>
 
-<table style="width: 100%; border-collapse: collapse;">
-    <tr>
-        <th style="background-color: #f2f2f2; text-align: left; padding: 10px;">Titre</th>
-        <th style="background-color: #f2f2f2; text-align: left; padding: 10px;">Date de création</th>
-        <th style="background-color: #f2f2f2; text-align: left; padding: 10px;">Créé par</th>
-        <th style="background-color: #f2f2f2; text-align: left; padding: 10px;">Status</th>
-        <th style="background-color: #f2f2f2; text-align: center; padding: 10px;">Modifier</th>
-        <th style="background-color: #f2f2f2; text-align: center; padding: 10px;">Supprimer</th>
-    </tr>
-    <!-- looping in categories array to show each category and option to edit and delete -->
+<section id="topic-list">  
+    <h2> <?=$category->getCategoryName();?> </h2>
+
+    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?= $id ?>" class="add-topic"><button>Créer un topic</button></a>
+
     <?php foreach($topics as $topic ) : 
-        $id = $topic->getId();
+        
         $status = ($topic->getIslocked() === 0) ? '<span style="color:green;">Open</span>' : '<span style="color:red;">Closed</span>';
+        $className = ($status) ? "closed" : "open"
     ?>
-    
-    ?>
-    <tr>
-        <td style="border: 1px solid #ddd; padding: 10px;">
-            <a href="index.php?ctrl=forum&action=showPostsByTopicId&id=<?= $id ?>"> <?=$topic->getTitle()?> </a>
-        </td>
-        <td style="border: 1px solid #ddd; padding: 10px;"> <?=$topic->getCreationDate()?>
-        </td>
-        <td style="border: 1px solid #ddd; padding: 10px;"> <?=$topic->getUser()?></td>
 
-        <td style="border: 1px solid #ddd; padding: 10px;"> <?= $status ?> </td>
+    <div class="topic">
+        <div class="topic-left">
+            <div class="icon-topic"><img src="./public/uploads/<?=$topic->getUser()->getAvatar()?>" alt="avatar" width="60px" height="60px"> </div>
+            <div>
+                <h3 class="topic-title"><a href="index.php?ctrl=forum&action=showPostsByTopicId&id=<?= $id ?>"> <?=$topic->getTitle()?>  </a></h3>
+                <p class="postedBy"> <span>Posted by :</span> <a href="#"> <?=$topic->getUser()?></a> - <?=$topic->getCreationDate()?> </p>
+            </div>
+        </div>
+        <div class="topic-right">
+            <span class="nbPosts">150</span>
 
-        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
-            <a href="index.php?ctrl=forum&action=updateTopicForm&id=<?= $id ?>"><button style="background-color: #4CAF50; color: white; border: none; padding: 5px 10px; cursor: pointer;">Modifier</button></a>
-        </td>
-        <td style="border: 1px solid #ddd; padding: 10px; text-align: center;">
-            <a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $id ?>"><button style="background-color: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">Supprimer</button></a>
-        </td>
-    </tr>
-    
+            <a href="index.php?ctrl=forum&action=updateTopicForm&id=<?= $topic->getId() ?>" class="edit"></a>
+            <a href="index.php?ctrl=forum&action=deleteTopicById&id=<?= $topic->getId() ?>" class="delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élément ?');"></a>
+           
+            <a href="index.php?ctrl=forum&action=toggleTopicStatusById&id=<?= $topic->getId() ?>" class="<?= $className ?>"></a>
+            
+        </div>
+    </div>
     <?php endforeach; ?>
+
+
+
+
+    <a href="index.php?ctrl=forum&action=addTopicForm&id=<?= $id ?>" class="add-topic"><button>Créer un topic</button></a>
     
-</table>
-
-<br>
 
 
-<a href="index.php?ctrl=forum&action=addTopicForm&id=<?= $id ?>" style="text-decoration: none;">
-    <button style="background-color: #007BFF; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px;">
-        Créer un nouveau topic
-    </button>
-</a>
+</section>
+
+<script>
+    /*
+    fonction pour modifier le status d'un topic
+    */
+
+
+    //  stock l'element ciblé dans une variable
+    const padlock = document.querySelector('.open'); 
+
+    // on crée la fonction qui fera l'échange de classe au click
+    function toggleClass(element, className) {
+        element.addEventListener('click', () => {
+        element.classList.toggle(className);
+        });
+    }
+  
+
+    toggleClass(padlock, '.closed');
+</script>
 

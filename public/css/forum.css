@@ -318,11 +318,11 @@ h2 a {
     padding: 10;
 }
 
- .categ-name a {
+ .top-categ-name a {
     color: inherit;
 }
 
-.categ-name a::before {
+.top-categ-name a::before {
     display: inline-block;
     content: "";
     width: 60px;

@@ -4,8 +4,8 @@
     <label for="categoryName" style="display: block; margin-bottom: 10px; font-weight: bold;">Nom de la catégorie :</label>
     <input type="text" name="categoryName" id="categoryName" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px;">
     
-    <label for="description" style="display: block; margin-bottom: 10px; font-weight: bold;">Description de la catégorie :</label>
-    <textarea name="description" id="description" cols="30" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px;"></textarea>
+    <label for="descriptions" style="display: block; margin-bottom: 10px; font-weight: bold;">Description de la catégorie :</label>
+    <textarea name="descriptions" id="descriptions" cols="30" rows="5" style="width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 3px;"></textarea>
     
     <input type="submit" value="Valider" style="background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 3px; cursor: pointer;">
 </form>

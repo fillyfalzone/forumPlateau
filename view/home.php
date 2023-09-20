@@ -64,17 +64,10 @@
         <h2><a href="#">Catégories populaires</a></h2>
 
         <div class="top-categ">
-            <h3 class="categ-name"><a href="#">CategName</a></h3>
+            <h3 class="top-categ-name"><a href="#">CategName</a></h3>
             <span class="nb-topics">150</span>
         </div>
-        <div class="top-categ">
-            <h3 class="categ-name"><a href="#">CategName</a></h3>
-            <span class="nb-topics">150</span>
-        </div>
-        <div class="top-categ">
-            <h3 class="categ-name"><a href="#">CategName</a></h3>
-            <span class="nb-topics">150</span>
-        </div>
+        
 
     </section>
 </div>
