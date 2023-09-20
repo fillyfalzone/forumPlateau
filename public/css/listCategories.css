@@ -1,0 +1,84 @@
+/* Style du tableau */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+}
+
+/* Style des titres de colonnes */
+th {
+    background-color: #272866;
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+
+/* Style des cellules de données */
+td {
+    border: 1px solid #272866;
+    padding: 10px;
+}
+
+/* Style des liens dans la première colonne */
+td a {
+    text-decoration: none;
+    color: #272866;
+    font-weight: bold;
+}
+
+/* Style des boutons "Modifier" et "Supprimer" */
+button {
+    background-color: #272866;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Style des boutons au survol */
+button:hover {
+    background-color: #1d1d4e;
+}
+
+/* Style du titre "Liste des catégories" */
+h2 {
+    color: #d9e7f5ed;
+    font-size: 24px;
+    border-radius: 20px;
+}
+
+/* Style du bouton "Ajouter une catégorie" */
+a button {
+    background-color: #272866;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+/* Style du bouton "Ajouter une catégorie" au survol */
+a button:hover {
+    background-color: #1d1d4e;
+}
+
+.categ-left {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+}
+
+.categ-left::before {
+    display: inline-block;
+    content: "";
+    width: 60px;
+    height: 80px;
+    background: url(../images/stack.svg) center center / cover no-repeat;
+    vertical-align: middle;
+    margin-right: 30px;
+
+}

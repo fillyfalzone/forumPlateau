@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <div id="wrapper">
+   
         <header>
             <div id="top-bar">
     
@@ -33,14 +33,14 @@
                 if(App\Session::getUser()){
                     ?>
                     <a href="/security/viewProfile.html"><span class="fas fa-user"></span>&nbsp;<?= App\Session::getUser()?></a>
-                    <a href="index.php?ctrl=security&action=logout">Déconnexion</a>
+                    <a href="index.php?ctrl=security&action=logout" id="logout">Déconnexion</a>
                     <?php
                 }
                 else{
                     ?>
                     
-                    <li id="register"> <a href="index.php?ctrl=security&action=registerForm">S'inscrire</a></li>
-                    <li id="login"><a href="index.php?ctrl=security&action=loginForm">Se connecter</a></li>
+                    <li> <a href="index.php?ctrl=security&action=registerForm" id="register">S'inscrire</a></li>
+                    <li ><a href="index.php?ctrl=security&action=loginForm" id="login">Se connecter</a></li>
 
                 <?php
                 }
@@ -52,6 +52,7 @@
 
     
             <nav id="nav-bar">
+                <div class="home-list">
                 <div id="home">
                     <a href="index.php"><img src=".<?=PUBLIC_DIR ?>/images/home.svg" alt="home"></a>
                 </div>
@@ -69,6 +70,7 @@
                 ?>
                     
                 </ul>
+                </div>
                 <form action="#" method="post" id="header-form">
                     <input type="search" name="search" placeholder="Rechercher..." id="search">
                     <input type="submit" id="submit" value="">
@@ -76,27 +78,29 @@
             </nav>
         </header>
 
-        <div id="mainpage">
-            <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
-            <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
-            <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+        <div id="wrapper">
 
-            <main id="forum">
-                <?= $page ?>
-            </main>
+            <div id="mainpage">
+                <!-- c'est ici que les messages (erreur ou succès) s'affichent-->
+                <h3 class="message" style="color: red"><?= App\Session::getFlash("error") ?></h3>
+                <h3 class="message" style="color: green"><?= App\Session::getFlash("success") ?></h3>
+
+                <main id="forum">
+                    <?= $page ?>
+                </main>
+            </div>
         </div>
-
 
            
         
 
+    <footer>
         <footer>
-            <footer>
-                <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a> - <a href="">sitemap</a></p>
-                <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
-            </footer>
+            <p>&copy; 2020 - Forum CDA - <a href="/home/forumRules.html">Règlement du forum</a> - <a href="">Mentions légales</a> - <a href="">sitemap</a></p>
+            <!--<button id="ajaxbtn">Surprise en Ajax !</button> -> cliqué <span id="nbajax">0</span> fois-->
         </footer>
-    </div>
+    </footer>
+    
 
 
     <script

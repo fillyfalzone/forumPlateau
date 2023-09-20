@@ -1,0 +1,62 @@
+/* Style du formulaire */
+form {
+    background-color: #D9E7F5;
+    padding: 20px;
+    border: 2px solid #272866;
+    border-radius: 10px;
+    width: 500px;
+    margin: 30px auto;
+    text-align: center;
+  
+}
+
+/* Style du titre */
+h2 {
+    color: #D9E7F5;
+    font-size: 24px;
+
+    border-radius: 20px;
+}
+
+/* Style des labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #272866;
+    font-weight: bold;
+}
+
+/* Style des champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"],
+input[type="checkbox"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #272866;
+    border-radius: 5px;
+}
+
+/* Style du lien dans le label de la checkbox */
+label a {
+    text-decoration: underline;
+    color: #272866;
+}
+
+/* Style du bouton d'inscription */
+input[type="submit"] {
+    background-color: #272866;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Style du bouton d'inscription au survol */
+input[type="submit"]:hover {
+    background-color: #1d1d4e;
+}

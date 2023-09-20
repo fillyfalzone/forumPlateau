@@ -4,7 +4,7 @@
 ?>
 
         
-<div id="home">
+<div id="home-page">
     <aside id="pseudo" class="left aside">
         <h2><a href="#">Pseudo</a></h2>
         <div id="main-avatar">

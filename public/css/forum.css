@@ -67,7 +67,7 @@ header {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    padding: 10px;
+    padding: 10px 100px;
     justify-content: space-between;
     background-color: #d9e7f5ed;
 }
@@ -75,7 +75,6 @@ header {
 /*On cale bien l'image du logo et le Titre*/
 
 #logo {
-    margin-left: 5vw;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -99,25 +98,26 @@ header {
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-right: 5vw;
 }
 
 #register {
     color: var(--rouge-perso);
-    font-family: var(--font-text);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#login {
+    color: var(--bleu-fonce);
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
 
-#login {
-    color: var(--bleu-fonce);
-    font-family: var(--font-text);
+#logout{
+    color: var(--rouge-perso);
     font-size: 20px;
-    font-style: normal;
     font-weight: 700;
-    line-height: normal;
 }
 
 /*on va faire le style de la nav-bar*/
@@ -125,8 +125,14 @@ header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #d9e7f5ed;
+    padding: 10px 100px;
+}
+.home-list {
+    display: flex;
+    align-items: center;
+    gap : 30px
 }
 
 
@@ -171,7 +177,7 @@ header {
 
 
 /* Styling du main */
-#home {
+#home-page {
     display: grid;
     grid-template-columns: 2.5fr 6fr 2.5fr;
     grid-template-rows: auto;
